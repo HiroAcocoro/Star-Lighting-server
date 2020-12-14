@@ -61,7 +61,11 @@ app.get("/api/spin/:studentNumber", (req, res) => {
 
     const studentNumber = req.params.studentNumber;
     // DONT FORGET TO UP ODDS OR EVERYONE WILL WIN!!!
-    const odds = 40;
+    const time = new Date();
+    const hour = time.getHours();    
+    const odds = getOdds(hour);
+
+    
 
 
     if (studentNumber === '05-1819-00001') {
@@ -231,5 +235,21 @@ function getDeg(result) {
     } else if (result === 100) {
         deg = Math.floor(Math.random() * (111 - 68 + 1) + 68);
         return deg;
+    }
+}
+
+function getOdds(hour) {
+    if (hour === 16) {
+        return 250;
+    } else if (hour === 17) {
+        return 200;
+    } else if (hour === 18) {
+        return 200;
+    } else if (hour === 19) {
+        return 130;
+    } else if (hour === 20) {
+        return 70;
+    } else {
+        return 250;
     }
 }
