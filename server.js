@@ -143,6 +143,27 @@ app.get("/api/spin/:studentNumber", (req, res) => {
     }
 
 })
+app.post("/api/insert", (req, res) => {
+
+    const studentFirstName = req.body.studentFirstName;
+    const studentLastName = req.body.studentLastName;
+    const studentNumber = req.body.studentNumber;
+    const result = 0;
+
+    const sqlInsert = "INSERT INTO student_data (studentFirstName, studentLastName, studentNumber, result) VALUES (?,?,?,?)";
+    db.query(sqlInsert, [studentFirstName, studentLastName, studentNumber, result], (err, result) => {
+        res.send(result);
+    });
+});
+
+app.put("/api/b10cd80a8fa906/clear", (req, res) => {
+
+    const sqlUpdate = "UPDATE prizes SET prizeStatus = ? WHERE prizeStatus = ?"
+    db.query(sqlUpdate, [0, 1], (err, result) => {
+        if (err) console.log(err);
+    });
+
+});
 
 
 app.listen(port, () => {
